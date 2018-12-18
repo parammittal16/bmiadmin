@@ -1,14 +1,10 @@
-.App{
+/* .App{
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-}
-
-.App-logo{
-	width: 10rem;
 }
 
 .flyout {
@@ -40,4 +36,7 @@
 .example-components-list li > a .fa {
 	color:rgba(0,0,0,.35);
 	float:right;
+} */
+* {
+	font-family: 'Poppins', sans-serif;
 }
