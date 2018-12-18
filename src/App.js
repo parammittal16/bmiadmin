@@ -8,7 +8,7 @@ import Newbook from './components/book/newBook';
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename="/bmiadmin">
       <div className="App">
       <Navbar />
       <Switch>
