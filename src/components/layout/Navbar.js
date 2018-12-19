@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, NavbarBrand, NavbarToggler, Collapse } from "mdbreact";
 import SignedInLink from './SignedInLink';
+import { connect } from 'react-redux';
 
 class NavbarPage extends React.Component {
   state = {
@@ -25,11 +26,16 @@ class NavbarPage extends React.Component {
             isOpen={this.state.isOpen}
             navbar
           >
-          <SignedInLink />
+          { this.props.isAuthenticated ? <SignedInLink /> : null}
           </Collapse>
       </Navbar>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.idToken !== null
+  }  
+}
 
-export default NavbarPage;
+export default connect(mapStateToProps)(NavbarPage);

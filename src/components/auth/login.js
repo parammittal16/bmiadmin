@@ -1,7 +1,10 @@
 import React , { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import img from '../../assets/bmi.png';
+import { connect } from 'react-redux';
+import { checkAuth } from '../../store/actions/authActions';
+import { Redirect } from 'react-router-dom';
+
 class Login extends Component {
     state = {
         email: '',
@@ -9,7 +12,7 @@ class Login extends Component {
     }
     HandleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        this.props.onAuth(this.state);
     }
     HandleChange = (e) => {
         this.setState({
@@ -17,8 +20,13 @@ class Login extends Component {
         })
     }
     render(){
+        let authRedirect = null;
+        if(this.props.isAuthenticated){
+                    authRedirect = (<Redirect to="/dashboard" />);
+        }
         return(
             <MDBContainer>
+            {authRedirect}
             <div className="text-center mt-4"><img style={{width:"130px"}} src={img} alt="Logo"/></div>
             <MDBRow className="d-flex justify-content-center mt-3">
             <MDBCol md="4">
@@ -39,7 +47,7 @@ class Login extends Component {
             />
             </div>
             <div className="text-center">
-            <MDBBtn><Link to="/dashboard" className="text-white">Login</Link></MDBBtn>
+            <MDBBtn onClick={this.HandleSubmit} >Login</MDBBtn>
             </div>
             </form>
             </MDBCol>
@@ -49,4 +57,15 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.auth.idToken !== null
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onAuth: (credientials) => (dispatch(checkAuth(credientials)))
+    } 
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

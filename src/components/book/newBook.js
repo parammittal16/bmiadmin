@@ -1,5 +1,7 @@
 import React , { Component } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+import { connect } from 'react-redux';
+import { addBook } from '../../store/actions/bookActions';
 
 class Newbook extends Component {
     state = {
@@ -9,7 +11,8 @@ class Newbook extends Component {
     }
     HandleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        console.log(this.props);
+        this.props.addBook(this.state, this.props.token);
     }
     HandleChange = (e) => {
         this.setState({
@@ -50,5 +53,15 @@ class Newbook extends Component {
         );
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        token: state.auth.idToken
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addBook: (book, token) => dispatch(addBook(book, token))
+    }
+}
 
-export default Newbook;
+export default connect(mapStateToProps, mapDispatchToProps)(Newbook);
