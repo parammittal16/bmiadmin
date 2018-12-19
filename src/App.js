@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Dashboard from './components/dashboard/dashboard';
 import Login from './components/auth/login';
@@ -23,12 +23,10 @@ class App extends Component {
       );
     }
     return (
-      <BrowserRouter basename="/bmiadmin">
       <div className="App">
       <Navbar />
       {routes}
       </div>
-      </BrowserRouter>
     );
   }
 }
