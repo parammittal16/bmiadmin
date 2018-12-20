@@ -7,7 +7,7 @@ class Newbook extends Component {
     state = {
         isbn: '',
         pdf: '',
-        video: ''
+        video: []
     }
     HandleSubmit = (e) => {
         e.preventDefault();
@@ -19,7 +19,13 @@ class Newbook extends Component {
             [e.target.id]: e.target.value
         })
     }
+    HandleAddVideo = (e) => {
+        this.setState({
+            video: e.target.value.split(",")
+        })
+    }
     render(){
+
         return(
             <MDBContainer>
             <MDBRow className="d-flex justify-content-center mt-3">
@@ -37,10 +43,10 @@ class Newbook extends Component {
             group
             type="text" onChange={this.HandleChange}
             />
-            <MDBInput id="video"
+            <MDBInput type="textarea" id="video"
             label="Type Video Link"
             group
-            type="text" onChange={this.HandleChange}
+            onChange={this.HandleAddVideo}
             />
             </div>
             <div className="text-center">
