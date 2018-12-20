@@ -5,7 +5,14 @@ import Dashboard from './components/dashboard/dashboard';
 import Login from './components/auth/login';
 import Newbook from './components/book/newBook';
 import {connect } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import logout from './components/auth/logout';
+import { authCheckState } from './store/actions/authActions';
+
 class App extends Component {
+  componentDidMount(){
+    this.props.onTryAutoLogin();
+  }
   render() {
     let routes = (
       <Switch>
@@ -18,15 +25,18 @@ class App extends Component {
       <Switch>
       <Route path='/dashboard' component={Dashboard} />
       <Route path='/newbook' component={Newbook} />
+      <Route path='/logout' component={logout} />
       <Redirect to="/dashboard" />
       </Switch>
       );
     }
     return (
+      <BrowserRouter basename="/bmiadmin">
       <div className="App">
       <Navbar />
       {routes}
       </div>
+      </BrowserRouter>
     );
   }
 }
@@ -35,4 +45,9 @@ const mapStateToProps = state => {
     isAuthenticated: state.auth.idToken !== null
   }  
 }
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAutoLogin: () => dispatch(authCheckState())
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);
