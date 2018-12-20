@@ -5,7 +5,7 @@ import { addBook } from '../../store/actions/bookActions';
 
 class Newbook extends Component {
     state = {
-        isbn: '',
+        isbn: -1,
         pdf: '',
         video: []
     }
@@ -14,9 +14,14 @@ class Newbook extends Component {
         console.log(this.props);
         this.props.addBook(this.state, this.props.token);
     }
-    HandleChange = (e) => {
+    HandleAddISBN = (e) => {
         this.setState({
-            [e.target.id]: e.target.value
+            isbn: parseInt(e.target.value)
+        })
+    }
+    HandleAddPdf = (e) => {
+        this.setState({
+            pdf: e.target.value
         })
     }
     HandleAddVideo = (e) => {
@@ -36,12 +41,12 @@ class Newbook extends Component {
             <MDBInput id="isbn"
             label="Type ISBN"
             group
-            type="text" onChange={this.HandleChange}
+            type="number" onChange={this.HandleAddISBN}
             />
             <MDBInput id="pdf"
             label="Type PDF Link"
             group
-            type="text" onChange={this.HandleChange}
+            type="text" onChange={this.HandleAddPdf}
             />
             <MDBInput type="textarea" id="video"
             label="Type Video Link"
