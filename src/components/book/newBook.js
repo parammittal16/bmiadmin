@@ -1,12 +1,15 @@
 import React , { Component } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import { connect } from 'react-redux';
+import QRCode from 'qrcode.react';
+
 import { addBook } from '../../store/actions/bookActions';
 
 class Newbook extends Component {
     state = {
         isbn: -1,
         pdf: '',
+        name: '',
         video: []
     }
     HandleSubmit = (e) => {
@@ -24,20 +27,33 @@ class Newbook extends Component {
             pdf: e.target.value
         })
     }
+    HandleAddName = (e) => {
+        this.setState({
+            name: e.target.value
+        })
+    }
     HandleAddVideo = (e) => {
         this.setState({
             video: e.target.value.split(",")
         })
     }
     render(){
-
+        let qrimage = null;
+        if(this.state.isbn !== -1) {
+            qrimage = (<QRCode size={520} value={String(this.state.isbn)} />);
+        }
         return(
             <MDBContainer>
-            <MDBRow className="d-flex justify-content-center mt-3">
-            <MDBCol md="4">
+            <MDBRow className="d-flex justify-content-center mt-5">
+            <MDBCol md="5">
             <form>
             <p className="h3 text-center mb-4">Add New Book</p>
             <div className="grey-text">
+            <MDBInput id="name"
+            label="Type Book Name"
+            group
+            type="text" onChange={this.HandleAddName}
+            />
             <MDBInput id="isbn"
             label="Type ISBN"
             group
@@ -58,6 +74,9 @@ class Newbook extends Component {
             <MDBBtn onClick={this.HandleSubmit}>Add</MDBBtn>
             </div>
             </form>
+            </MDBCol>
+            <MDBCol md="4" style={{textAlign: 'center'}}>
+            { qrimage }
             </MDBCol>
             </MDBRow>
             </MDBContainer>

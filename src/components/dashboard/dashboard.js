@@ -11,6 +11,10 @@ class Dashboard extends Component {
             <MDBCol className="d-flex justify-content-center"><MDBBtn className="w-100" color="primary"><Link className="text-white d-block" to="/newbook">Add a Book</Link></MDBBtn></MDBCol>
             <MDBCol className="d-flex justify-content-center"><MDBBtn className="w-100" color="default">Add Quiz</MDBBtn></MDBCol>
             </MDBRow>
+            <MDBRow className="mt-1">
+            <MDBCol className="d-flex justify-content-center"><MDBBtn className="w-100" color="primary"><Link className="text-white d-block" to="/allbooks">View All Book</Link></MDBBtn></MDBCol>
+            <MDBCol className="d-flex justify-content-center"><MDBBtn className="w-100" color="default">Add Quiz</MDBBtn></MDBCol>
+            </MDBRow>
             </MDBContainer>
         );
     }

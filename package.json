@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "mdbreact": "4.8.5-patch.1",
+    "qrcode.react": "^0.9.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-redux": "^6.0.0",
