@@ -24,7 +24,7 @@ class Newbook extends Component {
     }
     HandleAddISBN = (e) => {
         this.setState({
-            isbn: parseInt(e.target.value)
+            isbn: e.target.value
         })
     }
     HandleAddPdf = (e) => {
@@ -70,7 +70,7 @@ class Newbook extends Component {
             <MDBInput id="isbn"
             label="Type ISBN"
             group
-            type="number" onChange={this.HandleAddISBN}
+            type="text" onChange={this.HandleAddISBN}
             />
             <MDBInput id="pdf"
             label="Type PDF Link"

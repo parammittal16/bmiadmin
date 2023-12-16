@@ -123,7 +123,7 @@ class AllBooks extends Component {
                     label="Type ISBN"
                     group
                     value={this.state.isbn} 
-                    type="number" onChange={this.HandleAddISBN}
+                    type="text" onChange={this.HandleAddISBN}
                     />
                     <MDBInput id="pdf"
                     label="Type PDF Link"
